@@ -1,0 +1,37 @@
+﻿@model topic_challenge.ViewModels.TopicListViewModel
+
+@{
+}
+<div class="container">
+<div class="main-body p-0">
+    <div class="inner-wrapper">   
+
+            <!-- Inner main body -->
+
+            <!-- Forum List -->
+            <div class="inner-main-body p-2 p-sm-3 collapse forum-content show">
+                 @foreach (var topic in Model.Topics)
+                {
+                <div class="card mb-2">
+                    <div class="card-body p-2 p-sm-3">
+                        <div class="media forum-item">                            
+                            <div class="media-body">
+                                <h5>@topic.Title</h5>
+                                <p class="text-secondary">
+                                    @topic.Description
+                                </p>
+                                <p class="text-muted"> Criado no dia <span class="text-secondary font-weight-bold">@topic.CreationDate.Day/@topic.CreationDate.Month/@topic.CreationDate.Year</span></p>
+                            </div>
+                              @if(Model.CurrentUser.Id == topic.User.Id)
+                              {
+                                 @Html.ActionLink("Editar", "Edit", topic, new { @class = "btn btn-secondary", style="float: right" })
+                              }
+                        </div>
+                    </div>
+                </div>
+                }
+              
+            </div>
+            <!-- /Forum List -->  
+    
+</div>

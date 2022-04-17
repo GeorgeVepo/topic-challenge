@@ -1,0 +1,64 @@
+﻿@model topic_challenge.ViewModels.UserViewModel
+
+@{
+    Layout = null;
+}
+    <link href="~/css/bootstrap.css" rel="stylesheet" />   
+    <link href="~/css/form.css" rel="stylesheet" /> 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/bootstrap.js"></script>    
+
+@using (Html.BeginForm("create", "user", new {  }, FormMethod.Post, true,
+new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="form-login">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">                    
+                        Criar Usuário
+                    </div>
+                </div>
+
+                <div style="padding-top:30px" class="panel-body">
+                    <div style="display:none" id="result" class="alert alert-danger col-sm-12">
+
+                    </div>
+
+                    <div class="input-group" style="margin-bottom: 5px">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Username", autofocus = true } })
+                    </div>
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger"})
+
+                    <div style="margin-top: 25px; margin-bottom: 5px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon
+                        glyphicon-lock"></i></span>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Senha", @type = "password" } })
+                    </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"})
+
+                    <div style="margin-top: 25px; margin-bottom: 5px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon
+                        glyphicon-lock"></i></span>
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Confirmar Senha", @type = "password" } })
+                    </div>                    
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger"})
+
+                    <div style="margin-top:10px" class="form-group">
+
+                        <div class="col-sm-12 controls">
+                            <input type="submit" value="Criar" class="btn primary btn-lg" />                            
+                            <span style="float: right;font-size: larger;margin: 29px;"><a href="/">Voltar</a></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

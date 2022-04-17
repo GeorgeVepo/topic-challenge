@@ -1,0 +1,57 @@
+﻿@model topic_challenge.ViewModels.UserViewModel
+
+@{
+    Layout = null;
+}
+    <link href="~/css/bootstrap.css" rel="stylesheet" />   
+    <link href="~/css/form.css" rel="stylesheet" /> 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/bootstrap.js"></script>    
+
+@using (Html.BeginForm("login", "user", new {  }, FormMethod.Post, true,
+new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="form-login">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Login do Sistema</div>
+                </div>
+
+                <div  class="panel-body">
+                    <div style="margin-bottom: 5px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Username", autofocus = true } })
+                    </div>
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                    <div style="margin-top: 25px; margin-bottom: 5px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon
+                        glyphicon-lock"></i></span>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Senha", @type = "password" } })
+                    </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                     @if(!Model.Valid)
+                    {
+                        <spam class="text-danger">Usuário/Senha inválido.</spam>    
+                    }
+
+                    <div style="margin-top:10px" class="form-group">
+
+                        <div class="col-sm-12 controls">
+                            <input type="submit" value="Acessar" class="btn primary btn-lg" />
+                        </div>                        
+                    </div> 
+                     <div class="col-sm-12">                             
+                            <p>Não tem uma conta ainda? <a href="/form">Crie agora</a>.</p>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,50 @@
+﻿@model topic_challenge.ViewModels.TopicViewModel
+
+@{
+    Layout = null;
+}
+    <link href="~/css/bootstrap.css" rel="stylesheet" />   
+    <link href="~/css/form.css" rel="stylesheet" /> 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/bootstrap.js"></script>    
+
+@using (Html.BeginForm("edit", "topic", Model, FormMethod.Post, true, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="form-topic">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">                    
+                        Criar Tópico
+                    </div>
+                </div>
+
+                <div style="padding-top:30px" class="panel-body">
+
+                    <div class="input-group col-sm-12" style="margin-bottom: 5px">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Titulo", autofocus = true } })
+                    </div>
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger"})
+
+                    <div style="margin-top: 25px; margin-bottom: 5px" class="input-group col-sm-12">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control input-lg", placeholder = "Descrição", rows = 10, cols = 150, style="width:100%" })
+                    </div>
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger"})
+
+                    <div style="margin-top:10px" class="form-group">
+
+                        <div class="col-sm-12 controls">
+                            <input type="submit" value="Edit" class="btn primary btn-lg" />                            
+                            <span style="float: right;font-size: larger;margin: 29px;"><a href="/topic">Voltar</a></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
